@@ -1,0 +1,151 @@
+.layout__section {
+  max-width: 1024px;
+  min-width: 280px;
+  width: 100%;
+  border: 1px solid #8395a7;
+  margin: 40px auto;
+  padding: 40px 0px;
+}
+
+.common__article {
+  padding: 0 20px;
+}
+
+.common__article .common__hr {
+  height: 1px;
+  background-color: #e8e8e8;
+  margin: 20px 0px;
+}
+
+.common__boldHr {
+  height: 10px;
+  background-color: #e8e8e8;
+  margin: 40px 0px;
+}
+
+.traveler__title {
+  font-size: 1.6rem;
+  color: #333;
+  font-weight: 500;
+  line-height: 3rem;
+}
+
+.traveler__title > span {
+  color: #2e86de;
+  margin-left: 6px;
+}
+
+.traveler__label {
+  font-size: 1.2rem;
+  color: #8395a7;
+}
+
+.flex__row.horizontal > .traveler__inputForm {
+  width: calc(50% - 6px);
+}
+
+.flex__row.timeHorizontal > .traveler__inputForm:nth-of-type(1) {
+  width: 30%;
+}
+
+.flex__row.timeHorizontal > .traveler__inputForm:last-child {
+  width: calc(70% - 12px);
+}
+
+.traveler__inputForm,
+.traveler__checkForm {
+  margin-top: 20px;
+}
+
+.traveler__inputForm > label {
+  color: #222f3e;
+  font-size: 1.4rem;
+}
+
+.traveler__inputForm > div {
+  border: 1px solid #c8d6e5;
+  border-radius: 5px;
+  margin: 8px 0 6px;
+  padding: 5px 10px;
+}
+
+.traveler__inputForm > span {
+  font-size: 1rem;
+  color: #ff9f43;
+}
+
+.horizontal__void {
+  width: 12px;
+}
+
+.horizontal__line {
+  vertical-align: middle;
+  display: inline-block;
+  width: 1px;
+  height: 26px;
+  background-color: #c8d6e5;
+}
+
+.traveler__inputForm input,
+.traveler__inputForm select,
+.traveler__inputForm textarea {
+  width: 100%;
+  font-size: 1.4rem;
+  line-height: 2.6rem;
+}
+
+.traveler__inputForm select {
+  height: 26px;
+}
+
+.traveler__inputForm textarea {
+  height: 80px;
+  resize: none;
+}
+
+.traveler__inputForm button {
+  width: calc(50% - 0.5px);
+  line-height: 2.6rem;
+  background: transparent;
+  font-size: 1.4rem;
+}
+
+.policy__checkBox {
+  display: flex;
+  align-items: center;
+}
+
+.policy__checkBox.total > span {
+  font-weight: bold;
+}
+
+.traveler__checkForm.detail {
+  border: 1px solid #c8d6e5;
+  padding: 14px 10px;
+}
+
+.traveler__checkForm.detail > div:first-child {
+  margin-bottom: 20px;
+}
+
+.policy__checkBox > p {
+  width: 22px;
+  height: 22px;
+  border: 1px solid #c8d6e5;
+  margin-right: 8px;
+}
+
+.policy__checkBox > span {
+  font-size: 1.4rem;
+}
+
+.common__payButton {
+  width: 100%;
+  height: 50px;
+  margin-top: 40px;
+  border-radius: 3px;
+  background: #54a0ff;
+  color: #fff;
+  font-weight: 500;
+  font-size: 1.6rem;
+}
