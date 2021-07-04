@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 
-const Traveler = React.lazy(() => import('../../views/Traveler'));
+const TravelerList = React.lazy(() => import('../TravelerList'));
 const Time = React.lazy(() => import('../../views/Time'))
 const Phone = React.lazy(() => import('../../views/Phone'));
 const Etc = React.lazy(() => import('../../views/Etc'));
@@ -11,8 +11,7 @@ const App = () => {
     return (
         <Suspense fallback={<div>loading...</div>}>
             <section className={'layout__section'}>
-                <Traveler />
-                <Traveler />
+                <TravelerList />
                 <Time />
                 <Phone />
                 <Etc />
