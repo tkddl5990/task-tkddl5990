@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { FocusEvent, useState, useCallback } from 'react';
 import useInput from '../../hooks/useInput';
 import useBlur from '../../hooks/useBlur';
 import totalValidation from './validation';
@@ -6,6 +6,7 @@ import totalValidation from './validation';
 type TravelerProp = {
     index?: number;
     delete?: () => void;
+    blurHandler: (e: FocusEvent<HTMLInputElement>, index: number) => void;
 }
 
 const TravelerItem = (props: TravelerProp) => {
@@ -13,16 +14,16 @@ const TravelerItem = (props: TravelerProp) => {
     const [genderError, setGenderError] = useState('');
 
     const [lastName, onChangeLastName, setLastName] = useInput('');
-    const [lastNameError, onBlurLastName] = useBlur({ initialState: '', validationFc: totalValidation.valitaionName });
+    const [lastNameError, onBlurLastName] = useBlur({ initialState: '', validationFc: totalValidation.valitaionName, index: props.index, cb: props.blurHandler });
 
     const [firstName, onChangeFirstName, setFirstName] = useInput('');
-    const [firstNameError, onBlurFirstName] = useBlur({ initialState: '', validationFc: totalValidation.valitaionName });
+    const [firstNameError, onBlurFirstName] = useBlur({ initialState: '', validationFc: totalValidation.valitaionName, index: props.index, cb: props.blurHandler });
 
     const [nameKo, onChangeNameKo, setNameKo] = useInput('');
-    const [nameKoError, onBlurNameKo] = useBlur({ initialState: '', validationFc: totalValidation.validationNameKo });
+    const [nameKoError, onBlurNameKo] = useBlur({ initialState: '', validationFc: totalValidation.validationNameKo, index: props.index, cb: props.blurHandler });
 
     const [birth, onChangeBirth, setBirth] = useInput('');
-    const [birthError, onBlurBirth] = useBlur({ initialState: '', validationFc: totalValidation.validationBirth });
+    const [birthError, onBlurBirth] = useBlur({ initialState: '', validationFc: totalValidation.validationBirth, index: props.index, cb: props.blurHandler });
 
     const onChangeGenderHandler = useCallback((type) => {
         setGender((gender === type) ? '' : type);
@@ -40,13 +41,13 @@ const TravelerItem = (props: TravelerProp) => {
             <div className={'flex__row horizontal'}>
                 <div className={`traveler__inputForm ${lastNameError ? 'onError' : null}`}>
                     <label>영문 이름</label>
-                    <div><input placeholder={'Gil Dong'} value={lastName} onChange={onChangeLastName} onBlur={onBlurLastName} /></div>
+                    <div><input placeholder={'Gil Dong'} value={lastName} name={'lastName'} onChange={onChangeLastName} onBlur={onBlurLastName} /></div>
                     <span>{lastNameError}</span>
                 </div>
                 <div className={'horizontal__void'} />
                 <div className={`traveler__inputForm ${firstNameError ? 'onError' : null}`}>
                     <label>영문 이름</label>
-                    <div><input placeholder={'Hong'} value={firstName} onChange={onChangeFirstName} onBlur={onBlurFirstName} /></div>
+                    <div><input placeholder={'Hong'} value={firstName} name={'firstName'} onChange={onChangeFirstName} onBlur={onBlurFirstName} /></div>
                     <span>{firstNameError}</span>
                 </div>
             </div>

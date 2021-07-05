@@ -3,14 +3,13 @@ import useBlur from '../../hooks/useBlur';
 import useInput from '../../hooks/useInput';
 
 const Time = () => {
-    const [hour, onChangeHour, setHour] = useInput('');
     return (
         <article className={'common__article'}>
             <h2 className={'traveler__title'}>숙소 도착 예정 시간</h2>
             <div className={'flex__row horizontal'}>
                 <div className={'traveler__inputForm'}>
                     <div>
-                        <select onChange={onChangeHour} value={hour}>
+                        <select >
                             <option>시</option>
                             <option value={'1'}>1시</option>
                             <option value={'2'}>2시</option>

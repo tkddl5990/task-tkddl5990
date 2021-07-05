@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { Traveler } from '../../types/traveler.interface';
 import TravelerItem from '../../components/Traveler';
@@ -14,6 +14,10 @@ const TravelerObj = {
 const TravelerList = () => {
     const [traveler, setTraveler] = useState<Traveler[]>([]);
 
+    useEffect(() => {
+        addTraveler();
+    }, []);
+
     const addTraveler = useCallback(() => {
         setTraveler(prev => [...prev, TravelerObj])
     }, [])
@@ -24,10 +28,9 @@ const TravelerList = () => {
 
     return (
         <>
-            <TravelerItem />
-            {
-                traveler.map((item, index) => <TravelerItem index={index + 2} key={`travelerItem-${index}`} delete={(traveler.length - 1 === index) ? deleteTraveler : undefined} />)
-            }
+            {/* {
+                traveler.map((item, index) => <TravelerItem index={index + 1} key={`travelerItem-${index}`} />)
+            } */}
             <button className={'addTravelerButton'} onClick={addTraveler}>
                 <span className={'button__horizontal'} />
                 <span className={'button__vertical'} />
