@@ -1,4 +1,5 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useContext } from "react";
+import { OtherContext } from "../layouts/Container";
 
 export const useTravelerInput = (initialState, err, fn, { cb, index }) => {
   const [state, setState] = useState(initialState);
@@ -21,7 +22,8 @@ export const useTravelerInput = (initialState, err, fn, { cb, index }) => {
   return [state, error, handler, setState, setError];
 };
 
-export const useOtherInput = (initialState, err, fn, { cb }) => {
+export const useOtherInput = (initialState, err, fn) => {
+  const { setOtherState } = useContext(OtherContext);
   const [state, setState] = useState(initialState);
   const [error, setError] = useState(err);
 
@@ -29,9 +31,9 @@ export const useOtherInput = (initialState, err, fn, { cb }) => {
     (e) => {
       setState(e.target.value);
       setError(fn ? fn(e.target.value) : "");
-      if (cb) cb(e);
+      if (setOtherState) setOtherState(e);
     },
-    [fn, cb]
+    [fn, setOtherState]
   );
 
   return [state, error, handler, setState, setError];

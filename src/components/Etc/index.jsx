@@ -1,13 +1,12 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { validationEtc } from "../../validation/other";
 import { useOtherInput } from "../../hooks/useInput";
 
-const Etc = ({ setOtherState, paramsError }) => {
+const Etc = ({ paramsError }) => {
   const [etc, etcErr, onChangeEtc, setEtc, setEtcErr] = useOtherInput(
     "",
     "",
-    validationEtc,
-    { cb: setOtherState }
+    validationEtc
   );
 
   useEffect(() => {

@@ -1,4 +1,10 @@
-import React, { useEffect, useCallback, useState } from "react";
+import React, {
+  useEffect,
+  useCallback,
+  useState,
+  createContext,
+  useMemo,
+} from "react";
 import TravelerList from "../TravelerList";
 import Time from "../../components/Time";
 import Phone from "../../components/Phone";
@@ -15,6 +21,10 @@ const TravelerObj = {
   gender: "",
   birth: "",
 };
+
+export const OtherContext = createContext({
+  setOtherState: () => {},
+});
 
 const Container = () => {
   const [params, setParams] = useState({
@@ -125,6 +135,8 @@ const Container = () => {
     }
   }, [params]);
 
+  const value = useMemo(() => ({ setOtherState }), [setOtherState]);
+
   return (
     <section className={"layout__section"}>
       <TravelerList
@@ -134,11 +146,13 @@ const Container = () => {
         paramsError={paramsErr.traveler}
       />
       <AddButton addTravelerItem={addTravelerItem} />
-      <Time setOtherState={setOtherState} paramsError={paramsErr.time} />
-      <Phone setOtherState={setOtherState} paramsError={paramsErr.phone} />
-      <Etc setOtherState={setOtherState} paramsError={paramsErr.etc} />
-      <div className={"common__boldHr"} />
-      <Policy setOtherState={setOtherState} />
+      <OtherContext.Provider value={value}>
+        <Time paramsError={paramsErr.time} />
+        <Phone paramsError={paramsErr.phone} />
+        <Etc paramsError={paramsErr.etc} />
+        <div className={"common__boldHr"} />
+        <Policy />
+      </OtherContext.Provider>
       <PayButton policy={params.policy} submit={submit} />
     </section>
   );

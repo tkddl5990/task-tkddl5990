@@ -1,6 +1,8 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useContext } from "react";
+import { OtherContext } from "../../layouts/Container";
 
-const Policy = ({ setOtherState }) => {
+const Policy = () => {
+  const { setOtherState } = useContext(OtherContext);
   const [total, setTotal] = useState(false);
   const [req, setReq] = useState(false);
   const [cho, setCho] = useState(false);

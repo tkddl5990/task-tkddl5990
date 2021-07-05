@@ -2,18 +2,16 @@ import React, { useEffect } from "react";
 import { HourOptions, MinOptions } from "../Options";
 import { useOtherInput } from "../../hooks/useInput";
 
-const Time = ({ setOtherState, paramsError }) => {
+const Time = ({ paramsError }) => {
   const [hour, hourErr, onChangeHour, setHour, setHourErr] = useOtherInput(
     "",
     "",
-    undefined,
-    { cb: setOtherState }
+    undefined
   );
   const [min, minErr, onChangeMin, setMin, setMinErr] = useOtherInput(
     "",
     "",
-    undefined,
-    { cb: setOtherState }
+    undefined
   );
 
   useEffect(() => {

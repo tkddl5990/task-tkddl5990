@@ -3,21 +3,16 @@ import { useOtherInput } from "../../hooks/useInput";
 import { validationNameKo } from "../../validation/traveler";
 import { validationPhone } from "../../validation/other";
 
-const Phone = ({ setOtherState, paramsError }) => {
-  const cbObj = {
-    cb: setOtherState,
-  };
+const Phone = ({ paramsError }) => {
   const [name, nameErr, onChangeName, setName, setNameErr] = useOtherInput(
     "",
     "",
-    validationNameKo,
-    cbObj
+    validationNameKo
   );
   const [tel, telErr, onChangeTel, setTel, setTelErr] = useOtherInput(
     "",
     "",
-    validationPhone,
-    cbObj
+    validationPhone
   );
 
   useEffect(() => {
