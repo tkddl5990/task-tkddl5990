@@ -34,11 +34,11 @@ export const resultValidation = (list) => {
     }
 
     arr.push({
-      isValidLastName,
-      isValidFirstName,
-      isValidNameKo,
-      isValidBirth,
-      isValidGender,
+      lastName: isValidLastName,
+      firstName: isValidFirstName,
+      nameKo: isValidNameKo,
+      birth: isValidBirth,
+      gender: isValidGender,
     });
   }
 

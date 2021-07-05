@@ -1,47 +1,26 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { HourOptions, MinOptions } from "../Options";
+import { useOtherInput } from "../../hooks/useInput";
 
-const HourOptions = React.memo(() => {
-  console.log("hourOptions");
-  return Array.from({ length: 24 }, () => "hour").map((item, index) => (
-    <option
-      key={`${item}-${index}`}
-      value={`${index}시`}
-    >{`${index}시`}</option>
-  ));
-});
-
-const MinOptions = React.memo(() => {
-  console.log("minotpis");
-  return Array.from({ length: 60 }, () => "minute").map((item, index) => (
-    <option
-      key={`${item}-${index}`}
-      value={`${index}분`}
-    >{`${index}분`}</option>
-  ));
-});
-
-const Time = ({ setStateOthers, paramsError }) => {
-  const [hour, setHour] = useState("");
-  const [hourErr, setHourErr] = useState("");
-
-  const [min, setMin] = useState("");
-  const [minErr, setMinErr] = useState("");
-
-  const onChangeHour = useCallback((e) => {
-    setHour(e.target.value);
-    setStateOthers(e);
-    setHourErr("");
-  }, []);
-
-  const onChangeMin = useCallback((e) => {
-    setMin(e.target.value);
-    setStateOthers(e);
-    setMinErr("");
-  }, []);
+const Time = ({ setOtherState, paramsError }) => {
+  const [hour, hourErr, onChangeHour, setHour, setHourErr] = useOtherInput(
+    "",
+    "",
+    undefined,
+    { cb: setOtherState }
+  );
+  const [min, minErr, onChangeMin, setMin, setMinErr] = useOtherInput(
+    "",
+    "",
+    undefined,
+    { cb: setOtherState }
+  );
 
   useEffect(() => {
-    setHourErr(paramsError.hour);
-    setMinErr(paramsError.min);
+    if (paramsError && Object.keys(paramsError).length) {
+      setHourErr(paramsError.hour);
+      setMinErr(paramsError.min);
+    }
   }, [paramsError]);
 
   return (
@@ -73,4 +52,4 @@ const Time = ({ setStateOthers, paramsError }) => {
   );
 };
 
-export default Time;
+export default React.memo(Time);

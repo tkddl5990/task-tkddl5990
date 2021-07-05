@@ -1,31 +1,30 @@
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useOtherInput } from "../../hooks/useInput";
 import { validationNameKo } from "../../validation/traveler";
 import { validationPhone } from "../../validation/other";
 
-const Phone = ({ setStateOthers, paramsError }) => {
-  const [name, setName] = useState("");
-  const [nameErr, setNameErr] = useState("");
-
-  const [tel, setTel] = useState("");
-  const [telErr, setTelErr] = useState("");
-
-  const onChangeName = useCallback((e) => {
-    let msg = validationNameKo(e.target.value);
-    setName(e.target.value);
-    setNameErr(msg);
-    setStateOthers(e);
-  }, []);
-
-  const onChangeTel = useCallback((e) => {
-    let msg = validationPhone(e.target.value);
-    setTel(e.target.value);
-    setTelErr(msg);
-    setStateOthers(e);
-  }, []);
+const Phone = ({ setOtherState, paramsError }) => {
+  const cbObj = {
+    cb: setOtherState,
+  };
+  const [name, nameErr, onChangeName, setName, setNameErr] = useOtherInput(
+    "",
+    "",
+    validationNameKo,
+    cbObj
+  );
+  const [tel, telErr, onChangeTel, setTel, setTelErr] = useOtherInput(
+    "",
+    "",
+    validationPhone,
+    cbObj
+  );
 
   useEffect(() => {
-    setNameErr(paramsError.name);
-    setTelErr(paramsError.tel);
+    if (paramsError && Object.keys(paramsError).length) {
+      setNameErr(paramsError.name);
+      setTelErr(paramsError.tel);
+    }
   }, [paramsError]);
 
   return (
@@ -69,4 +68,4 @@ const Phone = ({ setStateOthers, paramsError }) => {
   );
 };
 
-export default Phone;
+export default React.memo(Phone);

@@ -132,7 +132,7 @@
   align-items: center;
 }
 
-.policy__checkBox.total > span {
+.policy__checkBox.total > label {
   font-weight: bold;
 }
 
@@ -145,14 +145,15 @@
   margin-bottom: 20px;
 }
 
-.policy__checkBox > p {
+.policy__checkBox > input {
+  display: inline-block;
   width: 22px;
   height: 22px;
   border: 1px solid #c8d6e5;
   margin-right: 8px;
 }
 
-.policy__checkBox > span {
+.policy__checkBox > label {
   font-size: 1.4rem;
 }
 
@@ -162,9 +163,14 @@
   margin-top: 40px;
   border-radius: 3px;
   background: #54a0ff;
+  opacity: 0.7;
   color: #fff;
   font-weight: 500;
   font-size: 1.6rem;
+}
+
+.common__payButton.onActive {
+  opacity: 1;
 }
 
 .addTravelerButton {

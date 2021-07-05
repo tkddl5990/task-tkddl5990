@@ -1,71 +1,56 @@
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import {
   valitaionName,
   validationNameKo,
   validationBirth,
 } from "../../validation/traveler";
+import { useTravelerInput } from "../../hooks/useInput";
 
-const TravelerItem = ({ index, deleteFn, setStateTraveler, paramsError }) => {
-  const [lastName, setLastName] = useState("");
-  const [lastNameErr, setLastNameErr] = useState("");
-
-  const [firstName, setFirstName] = useState("");
-  const [firstNameErr, setFirstNameErr] = useState("");
-
-  const [nameKo, setNameKo] = useState("");
-  const [nameKoErr, setNameKoErr] = useState("");
-
-  const [birth, setBirth] = useState("");
-  const [birthErr, setBirthErr] = useState("");
-
-  const [gender, setGender] = useState("");
-  const [genderErr, setGenderErr] = useState("");
-
-  const onChangeLastName = useCallback((e) => {
-    let msg = valitaionName(e.target.value);
-    setLastName(e.target.value);
-    setLastNameErr(msg);
-    setStateTraveler(e.target.value, e.target.name, index);
-    //전체 state에 추가
-  }, []);
-
-  const onChangeFirstName = useCallback((e) => {
-    let msg = valitaionName(e.target.value);
-    setFirstName(e.target.value);
-    setFirstNameErr(msg);
-    setStateTraveler(e.target.value, e.target.name, index);
-  }, []);
-
-  const onChangeNameKo = useCallback((e) => {
-    let msg = validationNameKo(e.target.value);
-    setNameKo(e.target.value);
-    setNameKoErr(msg);
-    setStateTraveler(e.target.value, e.target.name, index);
-  }, []);
-
-  const onChangeBirth = useCallback((e) => {
-    let msg = validationBirth(e.target.value);
-    setBirth(e.target.value);
-    setBirthErr(msg);
-    setStateTraveler(e.target.value, e.target.name, index);
-  }, []);
-
-  const onChangeGender = useCallback((e) => {
-    const [name, idx] = e.target.name.split("|");
-    console.log(e.target.value);
-    console.log(e.target.name);
-    setGender(e.target.value);
-    setGenderErr("");
-    setStateTraveler(e.target.value, name, index);
-  }, []);
+const TravelerItem = ({ material, deleteTravelerItem, paramsError }) => {
+  const { cb, index } = material;
+  const [
+    lastName,
+    lastNameErr,
+    onChangeLastName,
+    setLastName,
+    setLastNameErr,
+  ] = useTravelerInput("", "", valitaionName, material);
+  const [
+    firstName,
+    firstNameErr,
+    onChangeFirstName,
+    setFirstName,
+    setFirstNameErr,
+  ] = useTravelerInput("", "", valitaionName, material);
+  const [
+    nameKo,
+    nameKoErr,
+    onChangeNameKo,
+    setNameKo,
+    setNameKoErr,
+  ] = useTravelerInput("", "", validationNameKo, material);
+  const [
+    birth,
+    birthErr,
+    onChangeBirth,
+    setBirth,
+    setBirthErr,
+  ] = useTravelerInput("", "", validationBirth, material);
+  const [
+    gender,
+    genderErr,
+    onChangeGender,
+    setGender,
+    setGenderErr,
+  ] = useTravelerInput("", "", null, material);
 
   useEffect(() => {
     if (paramsError && Object.keys(paramsError).length) {
-      setLastNameErr(paramsError.isValidLastName);
-      setFirstNameErr(paramsError.isValidFirstName);
-      setNameKoErr(paramsError.isValidNameKo);
-      setBirthErr(paramsError.isValidBirth);
-      setGenderErr(paramsError.isValidGender);
+      setLastNameErr(paramsError.lastName);
+      setFirstNameErr(paramsError.firstName);
+      setNameKoErr(paramsError.nameKo);
+      setBirthErr(paramsError.birth);
+      setGenderErr(paramsError.gender);
     }
   }, [paramsError]);
 
@@ -73,8 +58,11 @@ const TravelerItem = ({ index, deleteFn, setStateTraveler, paramsError }) => {
     <article className={"common__article"}>
       <h2 className={"traveler__title"}>
         여행자<span>{index + 1}</span>
-        {deleteFn && (
-          <button className={"traveler__deleteButton"} onClick={deleteFn}>
+        {deleteTravelerItem && (
+          <button
+            className={"traveler__deleteButton"}
+            onClick={deleteTravelerItem}
+          >
             <span />
           </button>
         )}

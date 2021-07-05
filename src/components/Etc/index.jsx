@@ -1,16 +1,14 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { validationEtc } from "../../validation/other";
+import { useOtherInput } from "../../hooks/useInput";
 
-const Etc = ({ setStateOthers, paramsError }) => {
-  const [etc, setEtc] = useState("");
-  const [etcErr, setEtcErr] = useState("");
-
-  const onChangeEtc = useCallback((e) => {
-    let msg = validationEtc(e.target.value);
-    setEtc(e.target.value);
-    setEtcErr(msg);
-    setStateOthers(e);
-  }, []);
+const Etc = ({ setOtherState, paramsError }) => {
+  const [etc, etcErr, onChangeEtc, setEtc, setEtcErr] = useOtherInput(
+    "",
+    "",
+    validationEtc,
+    { cb: setOtherState }
+  );
 
   useEffect(() => {
     setEtcErr(paramsError);
@@ -35,4 +33,4 @@ const Etc = ({ setStateOthers, paramsError }) => {
   );
 };
 
-export default Etc;
+export default React.memo(Etc);
