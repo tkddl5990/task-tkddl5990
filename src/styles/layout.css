@@ -104,14 +104,20 @@
   resize: none;
 }
 
-.traveler__inputForm button {
+.traveler__inputForm div > input + label {
   width: calc(50% - 0.5px);
   line-height: 2.6rem;
   background: transparent;
   font-size: 1.4rem;
+  text-align: center;
+  display: inline-block;
 }
 
-.traveler__inputForm button.onActive {
+.traveler__inputForm div > input[type="radio"] {
+  display: none;
+}
+
+.traveler__inputForm div > input + label.onActive {
   color: #54a0ff;
   font-weight: bold;
 }
